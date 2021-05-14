@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    readonly int m_animeHashKeyState = Animator.StringToHash("State");
+    enum State
+    {
+        Idle,
+        Playing,
+        Config
+    }
     Rigidbody m_rigidbody;
 
     //[SerializeField] float m_distanceForCenter = 11f;
@@ -14,6 +22,9 @@ public class PlayerController : MonoBehaviour
     float m_pitchValue = 0f;
     float horizontal = 0f;
     bool m_isButtonUp = false;
+
+    State m_state = State.Idle;
+
     private void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -49,6 +60,8 @@ public class PlayerController : MonoBehaviour
                 1f * m_speed * Time.deltaTime);
         }
     }
+
+
 
     void HorizontalPlus()
     {

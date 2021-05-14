@@ -16,9 +16,22 @@ public class UIManager : MonoBehaviour
         AddList("LeftTepPanel");
         AddList("RightTepPanel");
         AddList("TitlePanel");
-        AddList("TitleText");
-        AddList("TitleButton");
+        AddList("StartText");
+        AddList("StartButton");
+        AddList("ConfigPanel");
+        AddList("ConfigButton");
+        AddList("ExitButton");
     }
+    void Start()
+    {
+        //버튼에 값넣어주기
+        FindObjcet("StartButton").GetComponent<CustomButton>().EventButtonUp += GameManager.instance.SetGameStart;
+        FindObjcet("ConfigButton").GetComponent<CustomButton>().EventButtonUp += GameManager.instance.OnConfig;
+        FindObjcet("ExitButton").GetComponent<CustomButton>().EventButtonUp += GameManager.instance.ExitConfig;
+
+        FindObjcet("ConfigPanel").SetActive(false);
+    }
+
 
     private void AddList(string temp)
     {

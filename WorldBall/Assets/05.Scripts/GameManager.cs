@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     static GameManager s_instance = null;
     public static GameManager instance { get { return s_instance; } }
+    //일시정지용
     bool m_isGamePlaying = false;
     public bool isGamePlaying { get { return m_isGamePlaying; } set { m_isGamePlaying = value; } }
     private Dictionary<string, GameObject> m_ObjectList = new Dictionary<string, GameObject>();
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
         s_instance = this;
         AddList("Player");
         AddList("Ground");
+        AddList("Main Camera");
     }
     private void Start()
     {
@@ -30,11 +32,11 @@ public class GameManager : MonoBehaviour
             //생성과 동시에 넣어줌
             m_monsterList.Add(temp);
         }
-        //버튼에 값넣어주기
-        UIManager.instance.FindObjcet("TitleButton").GetComponent<CustomButton>().EventButtonUp+=SetGameStart;
+        
     }
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Space)) m_isGamePlaying = true;
 
         int countE = 0;
@@ -73,9 +75,20 @@ public class GameManager : MonoBehaviour
 
         return m_ObjectList[temp];
     }
-    void SetGameStart()
+    public void SetGameStart()
     {
         m_isGamePlaying = true;
         UIManager.instance.FindObjcet("TitlePanel").SetActive(false);
+    }
+    public void OnConfig()
+    {
+        m_isGamePlaying = false;
+        FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.ChangeConfig);
+    }
+    public void ExitConfig()
+    {
+        m_isGamePlaying = true;
+        UIManager.instance.FindObjcet("ConfigPanel").SetActive(false);
+        FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.Fallow);
     }
 }
