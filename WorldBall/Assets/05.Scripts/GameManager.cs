@@ -6,6 +6,14 @@ public class GameManager : MonoBehaviour
 {
     static GameManager s_instance = null;
     public static GameManager instance { get { return s_instance; } }
+    public enum GameMode
+    {
+        Start,
+        Playing,
+        Config
+    }
+    GameMode m_gameMode = GameMode.Start;
+    public GameMode gameMode { get { return m_gameMode; } set { m_gameMode = value; } }
     //일시정지용
     bool m_isGamePlaying = false;
     public bool isGamePlaying { get { return m_isGamePlaying; } set { m_isGamePlaying = value; } }
@@ -77,16 +85,24 @@ public class GameManager : MonoBehaviour
     }
     public void SetGameStart()
     {
+        m_gameMode = GameMode.Playing;
         m_isGamePlaying = true;
         UIManager.instance.FindObjcet("TitlePanel").SetActive(false);
     }
     public void OnConfig()
     {
+        if(m_gameMode== GameMode.Config)
+        {
+            ExitConfig();
+            return;
+        }
+        m_gameMode = GameMode.Config;
         m_isGamePlaying = false;
         FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.ChangeConfig);
     }
     public void ExitConfig()
     {
+        m_gameMode = GameMode.Playing;
         m_isGamePlaying = true;
         UIManager.instance.FindObjcet("ConfigPanel").SetActive(false);
         FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.Fallow);

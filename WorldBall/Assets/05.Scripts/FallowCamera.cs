@@ -30,7 +30,6 @@ public class FallowCamera : MonoBehaviour
             //transform.rotation = Quaternion.LookRotation(dir.normalized);
             transform.LookAt(m_target.transform.position, m_target.transform.up);
 
-
             //float x = Input.GetAxis("Mouse X");
             //float y = Input.GetAxis("Mouse Y");
 
@@ -41,18 +40,19 @@ public class FallowCamera : MonoBehaviour
             Debug.Log(Vector3.Distance(transform.position, m_target.transform.position));
 
             if (Vector3.Distance(transform.position, m_target.transform.position) < 3.5f)
+                //&& transform.forward. == -m_target.transform.forward)
             {
                 ChangeCameraMode(CameraMode.Config);
             }
             Vector3 temp = m_target.transform.up * 3f;
             transform.position = Vector3.Slerp(transform.position, m_target.transform.position + temp + m_target.transform.forward * 1,
                 m_followSpeed * Time.deltaTime);
-            transform.position -= transform.right* m_rotateSpeed;// * m_followSpeed;
-            transform.LookAt(m_target.transform.position+ temp, m_target.transform.up);
+            transform.position -= transform.right * m_rotateSpeed;// * m_followSpeed;
+            transform.LookAt(m_target.transform.position + temp, m_target.transform.up);
         }
         else if (m_cameraMode == CameraMode.Config)
         {
-            UIManager.instance.FindObjcet("ConfigPanel").SetActive(true);
+            
         }
     }
     public void ChangeCameraMode(CameraMode cameraMode)
@@ -71,7 +71,7 @@ public class FallowCamera : MonoBehaviour
 
                 break;
             case CameraMode.Config:
-
+                UIManager.instance.FindObjcet("ConfigPanel").SetActive(true);
                 break;
         }
 

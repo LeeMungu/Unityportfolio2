@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     readonly int m_animeHashKeyState = Animator.StringToHash("State");
+    readonly int m_animeHashKeyRandomIdle = Animator.StringToHash("RandomIdle");
+
+    Animator m_animator;
     enum State
     {
-        Idle,
-        Playing,
-        Config
+        Idle=0,
+        Playing=1,
+        Config=2
     }
     Rigidbody m_rigidbody;
 
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody>();
         UIManager.instance.FindObjcet("LeftTepPanel").GetComponent<CustomButton>().EventButtonStay += HorizontalMinus;
         UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonStay += HorizontalPlus;
@@ -38,8 +42,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.isGamePlaying)
+
+        if (GameManager.instance.gameMode == GameManager.GameMode.Playing)
         {
+            ChangeState(State.Playing);
             //float horizontal = Input.GetAxis("Horizontal");//좌우
             //float vertical = Input.GetAxis("Vertical");//앞뒤
 
@@ -59,10 +65,32 @@ public class PlayerController : MonoBehaviour
                 //vertical 
                 1f * m_speed * Time.deltaTime);
         }
+        else if(GameManager.instance.gameMode == GameManager.GameMode.Start)
+        {
+            ChangeState(State.Idle);
+        }
+        else if (GameManager.instance.gameMode == GameManager.GameMode.Config)
+        {
+            ChangeState(State.Idle);
+        }
     }
+    void ChangeState(State state)
+    {
+        if (m_state == state)
+            return;
 
-
-
+        m_state = state;
+        m_animator.SetInteger(m_animeHashKeyState, (int)m_state);
+        switch(m_state)
+        {
+            case State.Idle:
+                break;
+            case State.Playing:
+                break;
+            case State.Config:
+                break;
+        }
+    }
     void HorizontalPlus()
     {
         if (horizontal < 1f)
@@ -80,5 +108,10 @@ public class PlayerController : MonoBehaviour
     void ButtonUp()
     {
         m_isButtonUp = true;
+    }
+    void OnRandomIdleAnimationEnd()
+    {
+        ChangeState(State.Idle);
+        m_animator.SetInteger(m_animeHashKeyRandomIdle,0);
     }
 }
