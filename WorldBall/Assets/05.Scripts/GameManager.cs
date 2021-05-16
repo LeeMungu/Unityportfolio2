@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static GameManager s_instance = null;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         s_instance = this;
-        AddList("Player");
+        AddList("Player1");
         AddList("Ground");
         AddList("Main Camera");
     }
@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.Space)) m_isGamePlaying = true;
-
         int countE = 0;
         for (int i = 0; i < m_monsterList.Count; ++i)
         {
@@ -88,6 +86,7 @@ public class GameManager : MonoBehaviour
         m_gameMode = GameMode.Playing;
         m_isGamePlaying = true;
         UIManager.instance.FindObjcet("TitlePanel").SetActive(false);
+        FindObjcet("Player1").GetComponent<PlayerSoundSet>().StartSoundPlay();
     }
     public void OnConfig()
     {
@@ -106,5 +105,19 @@ public class GameManager : MonoBehaviour
         m_isGamePlaying = true;
         UIManager.instance.FindObjcet("ConfigPanel").SetActive(false);
         FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.Fallow);
+    }
+    public void OnRestart()//씬재시작
+    {
+        SceneManager.LoadScene(0);
+    }
+    //어플리케이션 종료
+    public void OnEndGame()
+    {
+        Application.Quit();
+    }
+    //창나갔을때 정지
+    public void OnApplicationPause(bool pause)
+    {
+        m_isGamePlaying = pause;
     }
 }

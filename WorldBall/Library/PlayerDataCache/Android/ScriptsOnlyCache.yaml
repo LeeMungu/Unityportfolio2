@@ -3,19 +3,26 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CustomButton
     - DragFroce
+    - DynamicBone
+    - DynamicBoneCollider
     - FallowCamera
     - GameManager
-    - Player
     - PlayerController
+    - PlayerSoundSet
     - ScoreScript
+    - SoundManager
     - UIManager
+    - UISoundPlayer
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -28,6 +35,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Outline
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/01.Scenes/Scene1.unity:
@@ -57,6 +65,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
@@ -70,35 +82,47 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11268}
+      Script: {instanceID: 11274}
     - Class: 114
-      Script: {instanceID: 11432}
+      Script: {instanceID: 11290}
     - Class: 114
-      Script: {instanceID: 11472}
+      Script: {instanceID: 11440}
     - Class: 114
-      Script: {instanceID: 11650}
+      Script: {instanceID: 11480}
     - Class: 114
-      Script: {instanceID: 11852}
+      Script: {instanceID: 11658}
     - Class: 114
-      Script: {instanceID: 11876}
+      Script: {instanceID: 11860}
     - Class: 114
-      Script: {instanceID: 12136}
+      Script: {instanceID: 11884}
     - Class: 114
-      Script: {instanceID: 12156}
+      Script: {instanceID: 12056}
     - Class: 114
-      Script: {instanceID: 12282}
+      Script: {instanceID: 12164}
     - Class: 114
-      Script: {instanceID: 12542}
+      Script: {instanceID: 12290}
     - Class: 114
-      Script: {instanceID: 12792}
+      Script: {instanceID: 12552}
     - Class: 114
-      Script: {instanceID: 13100}
+      Script: {instanceID: 12802}
     - Class: 114
-      Script: {instanceID: 13164}
+      Script: {instanceID: 13112}
     - Class: 114
-      Script: {instanceID: 13204}
+      Script: {instanceID: 13176}
     - Class: 114
-      Script: {instanceID: 13226}
+      Script: {instanceID: 13206}
+    - Class: 114
+      Script: {instanceID: 13216}
+    - Class: 114
+      Script: {instanceID: 13240}
+    - Class: 114
+      Script: {instanceID: 13868}
+    - Class: 114
+      Script: {instanceID: 51386}
+    - Class: 114
+      Script: {instanceID: 53694}
+    - Class: 114
+      Script: {instanceID: 55794}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -110,6 +134,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -126,6 +152,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 0c65280181f776e9f40615a7dd1c9b5a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicBone
   - hash:
       serializedVersion: 2
       Hash: c42672c997f8be6b1aa86a927ebea785
@@ -332,6 +364,12 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
+      Hash: 28efe8b56738f2a99f16b517f1669e33
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicBoneCollider
+  - hash:
+      serializedVersion: 2
       Hash: d4020bafcd3ccbb5601a6e6c8ac78be0
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -342,12 +380,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 308c1e242e092927ba2fbe2e657fa4dc
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Player
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -374,7 +406,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 3553a2d05fcda36b665f533c23a6ada2
+      Hash: 0500b2c624b1da35d525985d48f9af0a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FallowCamera
@@ -396,6 +428,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: bbd8635ab96b071a3fc66943a872a3a4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicBoneColliderBase
   - hash:
       serializedVersion: 2
       Hash: f64fd37da5cb89243ec68b5026d70bb8
@@ -512,6 +550,12 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
+      Hash: 8bb3e9451e21e853c896742750b3c931
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicBoneDemo1
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -572,7 +616,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: 7336018460511004c0cfb6e2262566c3
+      Hash: 9d4ee8b7937e8dae128f92a2ea7cc9b5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DragFroce
@@ -582,6 +626,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ToggleGroup
+  - hash:
+      serializedVersion: 2
+      Hash: bbd8635ab96b071a3fc66943a872a3a4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicBonePlaneCollider
   - hash:
       serializedVersion: 2
       Hash: b507f7a1bd9005ca47b448b6d64d1ee2
@@ -594,6 +644,24 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UISoundPlayer
+  - hash:
+      serializedVersion: 2
+      Hash: 272a7f29206b52e13d0863ba951ff698
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SoundManager
+  - hash:
+      serializedVersion: 2
+      Hash: 3af9f041c61a1efaa324069d1b1322d0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerSoundSet
   platform: 13
   scenePathNames:
   - Assets/01.Scenes/Scene1.unity

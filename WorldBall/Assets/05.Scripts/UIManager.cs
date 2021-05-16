@@ -20,16 +20,25 @@ public class UIManager : MonoBehaviour
         AddList("StartButton");
         AddList("ConfigPanel");
         AddList("ConfigButton");
+        AddList("PlayerTerchPanel");
         AddList("ExitButton");
+        AddList("RestartButton");
+        AddList("EndButton");
+        //사운드
+        AddList("BGM");
+        AddList("Vice");
+        AddList("SE");
     }
     void Start()
     {
         //버튼에 값넣어주기
-        FindObjcet("StartButton").GetComponent<CustomButton>().EventButtonUp += GameManager.instance.SetGameStart;
+        FindObjcet("StartButton").GetComponent<CustomButton>().EventButtonDown += GameManager.instance.SetGameStart;
         FindObjcet("ConfigButton").GetComponent<CustomButton>().EventButtonUp += GameManager.instance.OnConfig;
         FindObjcet("ExitButton").GetComponent<CustomButton>().EventButtonUp += GameManager.instance.ExitConfig;
 
-        FindObjcet("ConfigPanel").SetActive(false);
+        FindObjcet("RestartButton").GetComponent<CustomButton>().EventButtonDown += GameManager.instance.OnRestart;
+        FindObjcet("EndButton").GetComponent<CustomButton>().EventButtonDown += GameManager.instance.OnEndGame;
+
     }
 
 

@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     bool m_isButtonUp = false;
 
     State m_state = State.Idle;
-
+    int m_randomIdle = 0;
+    Coroutine m_randomIdleCoroutine = null;
     private void Start()
     {
         m_animator = GetComponent<Animator>();
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonUp += ButtonUp;
         UIManager.instance.FindObjcet("LeftTepPanel").GetComponent<CustomButton>().EventButtonDown += ButtonDown;
         UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonDown += ButtonDown;
+        UIManager.instance.FindObjcet("PlayerTerchPanel").GetComponent<CustomButton>().EventButtonDown += RandomIdleSet;
     }
 
     private void Update()
@@ -84,12 +86,33 @@ public class PlayerController : MonoBehaviour
         switch(m_state)
         {
             case State.Idle:
+                if (m_randomIdleCoroutine == null)
+                    m_randomIdleCoroutine = StartCoroutine(IrandomIdleEter());
                 break;
             case State.Playing:
+                StopCoroutine(m_randomIdleCoroutine);
+                m_randomIdleCoroutine = null;
                 break;
             case State.Config:
+                StopCoroutine(m_randomIdleCoroutine);
+                m_randomIdleCoroutine = null;
                 break;
         }
+    }
+    IEnumerator IrandomIdleEter()
+    {
+        while (true)
+        {
+            yield return m_randomIdle == 0;
+            yield return new WaitForSeconds(10f);
+            RandomIdleSet();
+        }
+    }
+    void RandomIdleSet()
+    {
+        m_randomIdle = Random.Range(1, 4);
+        m_animator.SetInteger(m_animeHashKeyRandomIdle, m_randomIdle);
+        GetComponent<PlayerSoundSet>().IdleSoundPlay();
     }
     void HorizontalPlus()
     {
@@ -112,6 +135,7 @@ public class PlayerController : MonoBehaviour
     void OnRandomIdleAnimationEnd()
     {
         ChangeState(State.Idle);
-        m_animator.SetInteger(m_animeHashKeyRandomIdle,0);
+        m_randomIdle = 0;
+        m_animator.SetInteger(m_animeHashKeyRandomIdle,m_randomIdle);
     }
 }
