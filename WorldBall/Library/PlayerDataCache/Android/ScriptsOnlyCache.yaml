@@ -1,16 +1,22 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Crush
     - CustomButton
     - DragFroce
     - DynamicBone
     - DynamicBoneCollider
     - FallowCamera
     - GameManager
+    - JsonMgr
+    - NewMaterialChange
     - PlayerController
     - PlayerSoundSet
+    - ScaleFactorApplyToMaterial
     - ScoreScript
     - SoundManager
+    - StromMoveScripts
+    - TrapCrush
     - UIManager
     - UISoundPlayer
     Unity.Rider.Editor.dll:
@@ -18,11 +24,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -82,58 +85,76 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11274}
+      Script: {instanceID: 11284}
     - Class: 114
-      Script: {instanceID: 11290}
+      Script: {instanceID: 11302}
     - Class: 114
-      Script: {instanceID: 11440}
+      Script: {instanceID: 11454}
     - Class: 114
-      Script: {instanceID: 11480}
+      Script: {instanceID: 11496}
     - Class: 114
-      Script: {instanceID: 11658}
+      Script: {instanceID: 11678}
     - Class: 114
-      Script: {instanceID: 11860}
+      Script: {instanceID: 11782}
     - Class: 114
-      Script: {instanceID: 11884}
+      Script: {instanceID: 11882}
     - Class: 114
-      Script: {instanceID: 12056}
+      Script: {instanceID: 11906}
     - Class: 114
-      Script: {instanceID: 12164}
+      Script: {instanceID: 12032}
     - Class: 114
-      Script: {instanceID: 12290}
+      Script: {instanceID: 12084}
     - Class: 114
-      Script: {instanceID: 12552}
+      Script: {instanceID: 12198}
     - Class: 114
-      Script: {instanceID: 12802}
+      Script: {instanceID: 12324}
     - Class: 114
-      Script: {instanceID: 13112}
+      Script: {instanceID: 12336}
     - Class: 114
-      Script: {instanceID: 13176}
+      Script: {instanceID: 12592}
     - Class: 114
-      Script: {instanceID: 13206}
+      Script: {instanceID: 12596}
     - Class: 114
-      Script: {instanceID: 13216}
+      Script: {instanceID: 12836}
     - Class: 114
-      Script: {instanceID: 13240}
+      Script: {instanceID: 12848}
     - Class: 114
-      Script: {instanceID: 13868}
+      Script: {instanceID: 12904}
     - Class: 114
-      Script: {instanceID: 51386}
+      Script: {instanceID: 12942}
     - Class: 114
-      Script: {instanceID: 53694}
+      Script: {instanceID: 13118}
     - Class: 114
-      Script: {instanceID: 55794}
+      Script: {instanceID: 13140}
+    - Class: 114
+      Script: {instanceID: 13170}
+    - Class: 114
+      Script: {instanceID: 13234}
+    - Class: 114
+      Script: {instanceID: 13264}
+    - Class: 114
+      Script: {instanceID: 13274}
+    - Class: 114
+      Script: {instanceID: 13298}
+    - Class: 114
+      Script: {instanceID: 14338}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 135
       Script: {instanceID: 0}
+    - Class: 136
+      Script: {instanceID: 0}
     - Class: 137
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -152,6 +173,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 9aa97804a6d7c6a9a2176663ef44f26c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ObjectMoveDestroy
   - hash:
       serializedVersion: 2
       Hash: 0c65280181f776e9f40615a7dd1c9b5a
@@ -214,6 +241,12 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
+      Hash: 868e8d46a90def9366bc4165b42cdbc4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VariousEffectsScene
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -242,6 +275,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 632e5c0a44a44bd7450ae13323042836
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VariousTranslateMove
   - hash:
       serializedVersion: 2
       Hash: 7ab0e790220bdca831fdd886b339039d
@@ -280,7 +319,13 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: e7515c2163a11b9d611f0ff7c62b6695
+      Hash: b0652d5c58f8d43a1cc24080dae92c54
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VariousRotateObject
+  - hash:
+      serializedVersion: 2
+      Hash: 4fa1c502d8fd2a3dd375c9e12412d944
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -308,6 +353,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 272a7f29206b52e13d0863ba951ff698
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SoundManager
   - hash:
       serializedVersion: 2
       Hash: aba7b2852ef61d175dd9602e7723d5e5
@@ -364,6 +415,24 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
+      Hash: 3e4fdbb97eddbdd047b19055d37ce774
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VariousMouseOrbit
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TrapCrush
+  - hash:
+      serializedVersion: 2
+      Hash: 04b94797571ffa75719e643140ebfd2b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MultipleObjectsMake
+  - hash:
+      serializedVersion: 2
       Hash: 28efe8b56738f2a99f16b517f1669e33
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -376,10 +445,22 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
+      Hash: b662bcc8fa56bb80e6dfae486c800425
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShieldActivate
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 22ac8eb23630082b07df2ff765c5b8fe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ObjectMove
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -418,6 +499,12 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
+      Hash: b1324d93ed850de4a4392ef2775bdccd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StromMoveScripts
+  - hash:
+      serializedVersion: 2
       Hash: f84d945e5e1ca985698660fc26e9657f
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -434,6 +521,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DynamicBoneColliderBase
+  - hash:
+      serializedVersion: 2
+      Hash: 0da877ad61f6f92a3d18e7ff69459997
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LookAtTarget
   - hash:
       serializedVersion: 2
       Hash: f64fd37da5cb89243ec68b5026d70bb8
@@ -484,6 +577,18 @@ ScriptsOnlyBuild:
     className: UIManager
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: JsonMgr
+  - hash:
+      serializedVersion: 2
+      Hash: f964f3939cbc239a3a9ddd3fbea42550
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: _ObjectsMakeBase
+  - hash:
+      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -502,6 +607,12 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ScaleFactorApplyToMaterial
+  - hash:
+      serializedVersion: 2
       Hash: ae83e830e7a90c0aff918c4c2e520825
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -512,6 +623,24 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
+  - hash:
+      serializedVersion: 2
+      Hash: 3af9f041c61a1efaa324069d1b1322d0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerSoundSet
+  - hash:
+      serializedVersion: 2
+      Hash: 44a99ae8f96b5aab8ecbdb821d81f1fe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NewMaterialChange
+  - hash:
+      serializedVersion: 2
+      Hash: 89c4541c7ba28a093e9f9c018fe1ceb6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DelayActive
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -526,16 +655,34 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: df8f86ed93c30ab6f87ebec72ffe9480
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChangeSizeColor
+  - hash:
+      serializedVersion: 2
       Hash: 8cd1cbba27f3cb1717254f668e9e0d5a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshPro
   - hash:
       serializedVersion: 2
+      Hash: 43be576b27f01d955cf6500f728718e1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Crush
+  - hash:
+      serializedVersion: 2
       Hash: 3165968ba45c74472d279ba04455fccb
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ColorGradient
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UISoundPlayer
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -616,7 +763,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: 9d4ee8b7937e8dae128f92a2ea7cc9b5
+      Hash: 2e97d92b17ccc4b67bb23927c76a869c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DragFroce
@@ -644,24 +791,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: UISoundPlayer
-  - hash:
-      serializedVersion: 2
-      Hash: 272a7f29206b52e13d0863ba951ff698
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SoundManager
-  - hash:
-      serializedVersion: 2
-      Hash: 3af9f041c61a1efaa324069d1b1322d0
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerSoundSet
   platform: 13
   scenePathNames:
   - Assets/01.Scenes/Scene1.unity

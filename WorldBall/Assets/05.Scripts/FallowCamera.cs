@@ -5,10 +5,10 @@ public class FallowCamera : MonoBehaviour
 {
     public enum CameraMode
     {
+        Start,
         Fallow,
         ChangeConfig,
-        Config,
-        Start
+        Config
     }
     [SerializeField] GameObject m_target;
     [SerializeField] GameObject m_configTarget;
@@ -16,7 +16,7 @@ public class FallowCamera : MonoBehaviour
     [SerializeField] float m_followSpeed = 10;
     [SerializeField] float m_rotateSpeed = 0.3f;
     [SerializeField] float m_configLimitDistance = 3.5f;
-    CameraMode m_cameraMode = CameraMode.Fallow;
+    CameraMode m_cameraMode = CameraMode.Start;
     private void LateUpdate()
     {
         if (m_cameraMode == CameraMode.Fallow)
@@ -56,6 +56,16 @@ public class FallowCamera : MonoBehaviour
         {
             
         }
+        else if (m_cameraMode == CameraMode.Start)
+        {
+            //Debug.Log(Vector3.Distance(transform.position, m_target.transform.position));
+
+            Vector3 temp = m_target.transform.up * 3f + m_target.transform.right;
+            transform.position = Vector3.Lerp(transform.position, m_target.transform.position + temp + m_target.transform.forward * 2.5f,
+                m_followSpeed * Time.deltaTime);
+            //transform.position -= transform.right * m_rotateSpeed;// * m_followSpeed;
+            transform.LookAt(m_target.transform.position + temp, m_target.transform.up);
+        }
     }
     public void ChangeCameraMode(CameraMode cameraMode)
     {
@@ -74,6 +84,8 @@ public class FallowCamera : MonoBehaviour
                 break;
             case CameraMode.Config:
                 UIManager.instance.FindObjcet("ConfigPanel").SetActive(true);
+                break;
+            case CameraMode.Start:
                 break;
         }
 

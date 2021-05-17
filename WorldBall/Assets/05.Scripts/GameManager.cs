@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     {
         Start,
         Playing,
-        Config
+        Config,
+        GameOver
     }
     GameMode m_gameMode = GameMode.Start;
     public GameMode gameMode { get { return m_gameMode; } set { m_gameMode = value; } }
@@ -18,29 +19,45 @@ public class GameManager : MonoBehaviour
     bool m_isGamePlaying = false;
     public bool isGamePlaying { get { return m_isGamePlaying; } set { m_isGamePlaying = value; } }
     private Dictionary<string, GameObject> m_ObjectList = new Dictionary<string, GameObject>();
-    [SerializeField] GameObject m_monsterPrepeb;
+    [SerializeField] GameObject[] m_monsterPrepeb;
     [SerializeField] int m_monsterCount = 20;
     private List<GameObject> m_monsterList = new List<GameObject>();
+
+
+    string m_playerID = "testing";
     private void Awake()
     {
         s_instance = this;
         AddList("Player1");
         AddList("Ground");
         AddList("Main Camera");
+
+        if(SystemInfo.deviceUniqueIdentifier!=null)
+        m_playerID = SystemInfo.deviceUniqueIdentifier.Substring(0,3);
     }
     private void Start()
     {
+        //프레임 제한
+        Application.targetFrameRate = 60;
         //에너미 풀생성
-        for (int i = 0; i < m_monsterCount; ++i)
+        for (int i = 0; i < m_monsterCount*0.7; ++i)
         {
-            GameObject temp = Instantiate(m_monsterPrepeb,
+            GameObject temp = Instantiate(m_monsterPrepeb[0],
                 new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 70f,
                 Quaternion.identity);
             temp.SetActive(false);
             //생성과 동시에 넣어줌
             m_monsterList.Add(temp);
         }
-        
+        for (int i = 0; i < m_monsterCount * 0.3; ++i)
+        {
+            GameObject temp = Instantiate(m_monsterPrepeb[1],
+                new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 70f,
+                Quaternion.identity);
+            temp.SetActive(false);
+            //생성과 동시에 넣어줌
+            m_monsterList.Add(temp);
+        }
     }
     private void Update()
     {
@@ -87,10 +104,11 @@ public class GameManager : MonoBehaviour
         m_isGamePlaying = true;
         UIManager.instance.FindObjcet("TitlePanel").SetActive(false);
         FindObjcet("Player1").GetComponent<PlayerSoundSet>().StartSoundPlay();
+        FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.Fallow);
     }
     public void OnConfig()
     {
-        if(m_gameMode== GameMode.Config)
+        if(m_gameMode == GameMode.Config)
         {
             ExitConfig();
             return;
@@ -106,6 +124,15 @@ public class GameManager : MonoBehaviour
         UIManager.instance.FindObjcet("ConfigPanel").SetActive(false);
         FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.Fallow);
     }
+    public void OnRanking()
+    {
+        UIManager.instance.FindObjcet("RankingPanel").SetActive(true);
+    }
+    public void ExitRanking()
+    {
+        UIManager.instance.FindObjcet("RankingPanel").SetActive(false);
+    }
+
     public void OnRestart()//씬재시작
     {
         SceneManager.LoadScene(0);
@@ -114,6 +141,17 @@ public class GameManager : MonoBehaviour
     public void OnEndGame()
     {
         Application.Quit();
+    }
+    public void GameOver()
+    {
+        m_gameMode = GameMode.GameOver;
+        //저장
+        GetComponent<JsonMgr>().AddRank(m_playerID, UIManager.instance.scoreCount);
+        GetComponent<JsonMgr>().Save();// 랭킹 관리를 위해 로드는 UI에
+        //캐릭터 모션 추가할 것
+        FindObjcet("Player1").GetComponent<PlayerSoundSet>().EndSoundPlay();
+        
+        UIManager.instance.FindObjcet("GameOverPanel").SetActive(true);
     }
     //창나갔을때 정지
     public void OnApplicationPause(bool pause)

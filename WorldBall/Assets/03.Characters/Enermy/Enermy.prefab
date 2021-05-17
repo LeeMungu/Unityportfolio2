@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4562860658644988748}
   - component: {fileID: 4562860658644988749}
   - component: {fileID: 4562860658644988750}
+  - component: {fileID: -5778069726103267781}
   m_Layer: 9
   m_Name: Enermy
   m_TagString: Untagged
@@ -106,8 +107,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6546af4826da545acd7983e662d55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_score: 1
   m_Speed: 0.1
   m_gravity: 9.8
   m_groundRidus: 50.5
   m_rotationSpeed: 150
+--- !u!114 &-5778069726103267781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562860658644988751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecf096e3e296064b85827071c74353b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_score: 1

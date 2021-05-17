@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_speed = 1f;
     [SerializeField] float m_rotateSpeed = 1f;
     [SerializeField] float m_radiuse = 0.03f;
-    float m_yawValue = 0f;
-    float m_pitchValue = 0f;
     float horizontal = 0f;
     bool m_isButtonUp = false;
 
@@ -63,6 +61,7 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log(horizontal);
             transform.Rotate(new Vector3(0f, horizontal * m_rotateSpeed * Time.deltaTime, 0f), Space.Self);
+            
             transform.RotateAround(Vector3.zero, transform.right,
                 //vertical 
                 1f * m_speed * Time.deltaTime);
