@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     readonly int m_animeHashKeyState = Animator.StringToHash("State");
     readonly int m_animeHashKeyRandomIdle = Animator.StringToHash("RandomIdle");
+    readonly int m_animeHashKeyDie = Animator.StringToHash("Die");
 
     Animator m_animator;
     enum State
@@ -15,15 +16,24 @@ public class PlayerController : MonoBehaviour
         Playing=1,
         Config=2
     }
+    enum TerchMode
+    {
+        Left,
+        Right,
+        Noon
+    }
+
     Rigidbody m_rigidbody;
 
     //[SerializeField] float m_distanceForCenter = 11f;
     [SerializeField] float m_speed = 1f;
     [SerializeField] float m_rotateSpeed = 1f;
     [SerializeField] float m_radiuse = 0.03f;
+    [SerializeField] float m_plusSpeed = 10f;
     float horizontal = 0f;
-    bool m_isButtonUp = false;
+    //bool m_isButtonUp = false;
 
+    TerchMode m_terchMode = TerchMode.Noon;
     State m_state = State.Idle;
     int m_randomIdle = 0;
     Coroutine m_randomIdleCoroutine = null;
@@ -33,10 +43,10 @@ public class PlayerController : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
         UIManager.instance.FindObjcet("LeftTepPanel").GetComponent<CustomButton>().EventButtonStay += HorizontalMinus;
         UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonStay += HorizontalPlus;
-        UIManager.instance.FindObjcet("LeftTepPanel").GetComponent<CustomButton>().EventButtonUp += ButtonUp;
-        UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonUp += ButtonUp;
-        UIManager.instance.FindObjcet("LeftTepPanel").GetComponent<CustomButton>().EventButtonDown += ButtonDown;
-        UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonDown += ButtonDown;
+        UIManager.instance.FindObjcet("LeftTepPanel").GetComponent<CustomButton>().EventButtonUp += ButtonUpLeft;
+        UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonUp += ButtonUpRight;
+        UIManager.instance.FindObjcet("LeftTepPanel").GetComponent<CustomButton>().EventButtonDown += ButtonDownLeft;
+        UIManager.instance.FindObjcet("RightTepPanel").GetComponent<CustomButton>().EventButtonDown += ButtonDownRight;
         UIManager.instance.FindObjcet("PlayerTerchPanel").GetComponent<CustomButton>().EventButtonDown += RandomIdleSet;
     }
 
@@ -50,16 +60,27 @@ public class PlayerController : MonoBehaviour
             //float vertical = Input.GetAxis("Vertical");//앞뒤
 
             //업됫을때만
-            if (m_isButtonUp)
+            if (m_terchMode == TerchMode.Noon)
             {
                 if (horizontal > 0)
                     horizontal -= m_radiuse;
                 else if (horizontal < 0)
                     horizontal += m_radiuse;
                 else
-                    m_isButtonUp = false;
+                    m_terchMode = TerchMode.Noon;
             }
-            Debug.Log(horizontal);
+            else if(m_terchMode == TerchMode.Left)
+            {
+                if (horizontal > -1f)
+                    horizontal -= m_radiuse;
+            }
+            else if(m_terchMode == TerchMode.Right)
+            {
+                if (horizontal < 1f)
+                    horizontal += m_radiuse;
+            }
+
+            //Debug.Log(horizontal);
             transform.Rotate(new Vector3(0f, horizontal * m_rotateSpeed * Time.deltaTime, 0f), Space.Self);
             
             transform.RotateAround(Vector3.zero, transform.right,
@@ -98,6 +119,8 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+
     IEnumerator IrandomIdleEter()
     {
         while (true)
@@ -123,18 +146,43 @@ public class PlayerController : MonoBehaviour
         if (horizontal > -1f)
             horizontal -= m_radiuse;
     }
-    void ButtonDown()
+    void ButtonDownLeft()
     {
-        m_isButtonUp = false;
+        if (m_terchMode == TerchMode.Right)
+            horizontal = 0;
+        m_terchMode = TerchMode.Left;
     }
-    void ButtonUp()
+    void ButtonDownRight()
     {
-        m_isButtonUp = true;
+        if (m_terchMode == TerchMode.Left)
+            horizontal = 0;
+        m_terchMode = TerchMode.Right;
+    }
+    void ButtonUpLeft()
+    {
+        if (m_terchMode == TerchMode.Left)
+            m_terchMode = TerchMode.Noon;
+    }
+    void ButtonUpRight()
+    {
+        if (m_terchMode == TerchMode.Right)
+            m_terchMode = TerchMode.Noon;
+    }
+
+    public void SetDie()
+    {
+        m_animator.SetTrigger(m_animeHashKeyDie);
     }
     void OnRandomIdleAnimationEnd()
     {
         ChangeState(State.Idle);
         m_randomIdle = 0;
         m_animator.SetInteger(m_animeHashKeyRandomIdle,m_randomIdle);
+    }
+
+    //시간에 따른 이속증가
+    public void PlusSpeed()
+    {
+        m_speed += m_plusSpeed;
     }
 }

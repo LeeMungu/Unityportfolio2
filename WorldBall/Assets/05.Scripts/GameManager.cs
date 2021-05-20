@@ -23,17 +23,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] int m_monsterCount = 20;
     private List<GameObject> m_monsterList = new List<GameObject>();
 
-
+    float m_time = 0f;
+    float m_countTime = 0f;
+    public float time { get { return m_time; } }
     string m_playerID = "testing";
+    public string playerID { get { return m_playerID; } }
     private void Awake()
     {
         s_instance = this;
         AddList("Player1");
         AddList("Ground");
         AddList("Main Camera");
+        AddList("Trap");
 
         if(SystemInfo.deviceUniqueIdentifier!=null)
-        m_playerID = SystemInfo.deviceUniqueIdentifier.Substring(0,3);
+        m_playerID = SystemInfo.deviceUniqueIdentifier.Substring(0,5);
     }
     private void Start()
     {
@@ -61,6 +65,19 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if(m_gameMode == GameMode.Playing)
+        {
+            m_time += Time.deltaTime;
+            m_countTime += Time.deltaTime;
+            UIManager.instance.TimeUpdate();
+            if(m_countTime>10)
+            {
+                m_countTime = 0;
+                FindObjcet("Player1").GetComponent<PlayerController>().PlusSpeed();
+                FindObjcet("Trap").GetComponent<StromMoveScripts>().SpeedUp();
+                Debug.Log("스피드UP");
+            }
+        }
         
         int countE = 0;
         for (int i = 0; i < m_monsterList.Count; ++i)
@@ -150,8 +167,9 @@ public class GameManager : MonoBehaviour
         GetComponent<JsonMgr>().Save();// 랭킹 관리를 위해 로드는 UI에
         //캐릭터 모션 추가할 것
         FindObjcet("Player1").GetComponent<PlayerSoundSet>().EndSoundPlay();
-        
+        FindObjcet("Player1").GetComponent<PlayerController>().SetDie();
         UIManager.instance.FindObjcet("GameOverPanel").SetActive(true);
+        GameData.instance.InsertData();
     }
     //창나갔을때 정지
     public void OnApplicationPause(bool pause)

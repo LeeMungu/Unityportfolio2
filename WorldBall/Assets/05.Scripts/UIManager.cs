@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
         AddList("RankingPanel");
         AddList("RankingText");
         AddList("ExitRankButton");
+        AddList("TimeText");
         //사운드
         AddList("BGM");
         AddList("Vice");
@@ -70,10 +71,39 @@ public class UIManager : MonoBehaviour
 
         return m_UIList[temp];
     }
-
     public void ScorePlus (int addCount)
     {
         m_scoreCount+=addCount;
         FindObjcet("ScoreText").GetComponent<ScoreScript>().ScoreCount(m_scoreCount);
+    }
+    public void TimeUpdate()
+    {
+        int m_time = (int)(GameManager.instance.time*60);
+        int hr = (m_time / 60 / 60)%60;
+        int min = (m_time / 60) % 60;
+        int scend = m_time % 60;
+        string timeText = null;
+        if (hr == 0)
+            timeText += "00";
+        else if (hr < 10)
+            timeText += "0" + hr;
+        else
+            timeText += hr;
+        timeText += ".";
+        if (min == 0)
+            timeText += "00";
+        else if (min < 10)
+            timeText += "0" + min;
+        else
+            timeText += min;
+        timeText += ".";
+        if (scend== 0)
+            timeText += "00";
+        else if (scend < 10)
+            timeText += "0" + scend;
+        else
+            timeText += scend;
+
+        FindObjcet("TimeText").GetComponent<Text>().text = timeText;
     }
 }

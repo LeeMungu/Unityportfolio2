@@ -17,7 +17,7 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     
     //후에 싱글톤 등에서 읽어오는 식으로 교체 예정
     Camera m_uiCamera;
-    void Strat()
+    void Start()
     {
         m_uiCamera = GameObject.Find("UICamera").GetComponent<Camera>();
     }

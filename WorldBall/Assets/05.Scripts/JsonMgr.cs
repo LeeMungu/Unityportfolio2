@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using System.IO;
+using BackEnd;
 
 public class JsonMgr : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class JsonMgr : MonoBehaviour
     public void Save()
     {
         JsonData RankJson = JsonMapper.ToJson(RankingList);
+        //Backend.
+        //파일에 쓰기
         File.WriteAllText(Application.persistentDataPath + m_path, RankJson.ToString());
     }
     public void Load()
@@ -51,12 +54,12 @@ public class JsonMgr : MonoBehaviour
     }
     public string Output()
     {
-        string temp = "\n\n";
+        string temp = null;
         for(int i=0; i<RankingList.Count; ++i)
         {
             int n = i + 1;
-            temp +="\t\t"+ n + "\t\t\t";
-            temp += RankingList[i].ID + "\t\t\t\t";
+            temp +="\t"+ n + "\t\t\t";
+            temp += RankingList[i].ID + "\t\t\t";
             temp += RankingList[i].Score + "\n";
         }
         return temp;
