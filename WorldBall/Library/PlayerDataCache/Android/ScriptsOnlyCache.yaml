@@ -17,6 +17,7 @@ ScriptsOnlyBuild:
     - ScoreScript
     - SoundManager
     - StromMoveScripts
+    - TerchSreenMode
     - TrapCrush
     - UIManager
     - UISoundPlayer
@@ -95,71 +96,73 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11284}
+      Script: {instanceID: 11298}
     - Class: 114
-      Script: {instanceID: 11302}
+      Script: {instanceID: 11316}
     - Class: 114
-      Script: {instanceID: 11454}
+      Script: {instanceID: 11470}
     - Class: 114
-      Script: {instanceID: 11496}
+      Script: {instanceID: 11512}
     - Class: 114
-      Script: {instanceID: 11550}
+      Script: {instanceID: 11566}
     - Class: 114
-      Script: {instanceID: 11678}
+      Script: {instanceID: 11698}
     - Class: 114
-      Script: {instanceID: 11782}
+      Script: {instanceID: 11802}
     - Class: 114
-      Script: {instanceID: 11810}
+      Script: {instanceID: 11830}
     - Class: 114
-      Script: {instanceID: 11882}
+      Script: {instanceID: 11904}
     - Class: 114
-      Script: {instanceID: 11906}
+      Script: {instanceID: 11928}
     - Class: 114
-      Script: {instanceID: 12032}
+      Script: {instanceID: 12054}
     - Class: 114
-      Script: {instanceID: 12084}
+      Script: {instanceID: 12106}
     - Class: 114
-      Script: {instanceID: 12112}
+      Script: {instanceID: 12134}
     - Class: 114
-      Script: {instanceID: 12198}
+      Script: {instanceID: 12218}
     - Class: 114
-      Script: {instanceID: 12324}
+      Script: {instanceID: 12344}
     - Class: 114
-      Script: {instanceID: 12334}
+      Script: {instanceID: 12354}
     - Class: 114
-      Script: {instanceID: 12336}
+      Script: {instanceID: 12356}
     - Class: 114
-      Script: {instanceID: 12592}
+      Script: {instanceID: 12406}
     - Class: 114
-      Script: {instanceID: 12596}
+      Script: {instanceID: 12618}
     - Class: 114
-      Script: {instanceID: 12836}
+      Script: {instanceID: 12624}
     - Class: 114
-      Script: {instanceID: 12848}
+      Script: {instanceID: 12864}
     - Class: 114
-      Script: {instanceID: 12904}
+      Script: {instanceID: 12876}
     - Class: 114
-      Script: {instanceID: 12942}
+      Script: {instanceID: 12934}
     - Class: 114
-      Script: {instanceID: 13118}
+      Script: {instanceID: 12974}
     - Class: 114
-      Script: {instanceID: 13140}
+      Script: {instanceID: 13008}
     - Class: 114
-      Script: {instanceID: 13170}
+      Script: {instanceID: 13154}
     - Class: 114
-      Script: {instanceID: 13234}
+      Script: {instanceID: 13176}
     - Class: 114
-      Script: {instanceID: 13264}
+      Script: {instanceID: 13206}
     - Class: 114
-      Script: {instanceID: 13274}
+      Script: {instanceID: 13208}
     - Class: 114
-      Script: {instanceID: 13298}
+      Script: {instanceID: 13272}
     - Class: 114
-      Script: {instanceID: 14370}
+      Script: {instanceID: 13302}
     - Class: 114
-      Script: {instanceID: 64198}
+      Script: {instanceID: 13312}
     - Class: 114
-      Script: {instanceID: 64668}
+      Script: {instanceID: 13338}
+    - Class: 114
+      Script: {instanceID: 14428}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -309,6 +312,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: GridLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: TheBackendHashKeySettings.dll
+    namespaceName: 
+    className: TheBackendHashKeySettings
   - hash:
       serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
@@ -521,7 +530,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: b1324d93ed850de4a4392ef2775bdccd
+      Hash: 768f5d29fc97a97c562f7aa25aff85f8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StromMoveScripts
@@ -531,6 +540,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TerchSreenMode
   - hash:
       serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
@@ -641,6 +656,12 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SendQueueMgr
+  - hash:
+      serializedVersion: 2
       Hash: 8e6ceabfd38a184413d69b7db56c89cc
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
@@ -657,6 +678,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NewMaterialChange
+  - hash:
+      serializedVersion: 2
+      Hash: 1bed92be7ff431d910b983d6e02b8729
+    assemblyName: TheBackendSettings.dll
+    namespaceName: 
+    className: TheBackendSettings
   - hash:
       serializedVersion: 2
       Hash: 89c4541c7ba28a093e9f9c018fe1ceb6
@@ -731,6 +758,12 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameData
+  - hash:
+      serializedVersion: 2
       Hash: a63fc1a3b035e5a0b5839cd7f7b3086e
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -803,7 +836,7 @@ ScriptsOnlyBuild:
     className: DynamicBonePlaneCollider
   - hash:
       serializedVersion: 2
-      Hash: b507f7a1bd9005ca47b448b6d64d1ee2
+      Hash: 718543d86ea32579b2f05d0b3f3f187a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -813,30 +846,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: TheBackendHashKeySettings.dll
-    namespaceName: 
-    className: TheBackendHashKeySettings
-  - hash:
-      serializedVersion: 2
-      Hash: 1bed92be7ff431d910b983d6e02b8729
-    assemblyName: TheBackendSettings.dll
-    namespaceName: 
-    className: TheBackendSettings
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SendQueueMgr
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameData
   platform: 13
   scenePathNames:
   - Assets/01.Scenes/Scene1.unity
