@@ -36,8 +36,10 @@ public class GameManager : MonoBehaviour
         AddList("Main Camera");
         AddList("Trap");
 
+        //GameData.instance.Guestlogin();
         if(SystemInfo.deviceUniqueIdentifier!=null)
-        m_playerID = SystemInfo.deviceUniqueIdentifier.Substring(0,5);
+            m_playerID = SystemInfo.deviceUniqueIdentifier.Substring(0,5);
+        UIManager.instance.IDText();
     }
     private void Start()
     {
@@ -175,5 +177,12 @@ public class GameManager : MonoBehaviour
     public void OnApplicationPause(bool pause)
     {
         m_isGamePlaying = pause;
+    }
+
+    //PlayerID셋팅
+    public void ChangePlayerID(string text)
+    {
+        m_playerID = text;
+        UIManager.instance.IDText();
     }
 }

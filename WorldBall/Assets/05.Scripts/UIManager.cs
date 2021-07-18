@@ -32,6 +32,11 @@ public class UIManager : MonoBehaviour
         AddList("RankingText");
         AddList("ExitRankButton");
         AddList("TimeText");
+        AddList("IDText");
+        AddList("IDInput");
+        AddList("IDTextButton");
+        AddList("IDInputField");
+        AddList("IDInputButton");
         //사운드
         AddList("BGM");
         AddList("Vice");
@@ -51,12 +56,15 @@ public class UIManager : MonoBehaviour
         FindObjcet("GameOverRestartButton").GetComponent<CustomButton>().EventButtonDown += GameManager.instance.OnRestart;
         FindObjcet("EndButton").GetComponent<CustomButton>().EventButtonDown += GameManager.instance.OnEndGame;
 
+        //NickName부분
+        FindObjcet("IDTextButton").GetComponent<CustomButton>().EventButtonUp += OnIDTextButton;
 
         FindObjcet("GameOverPanel").SetActive(false);
         GetComponent<JsonMgr>().Load();
         FindObjcet("RankingText").GetComponent<Text>().text = GetComponent<JsonMgr>().Output();
         //컨피그는 설정때문에 soundManager에서 꺼줌
         FindObjcet("RankingPanel").SetActive(false);
+        FindObjcet("IDInput").SetActive(false);
     }
 
 
@@ -105,5 +113,20 @@ public class UIManager : MonoBehaviour
             timeText += scend;
 
         FindObjcet("TimeText").GetComponent<Text>().text = timeText;
+    }
+    public void IDText()
+    {
+        FindObjcet("IDText").GetComponent<Text>().text = "ID : " + GameManager.instance.playerID.ToString() ;
+    }
+    public void OnIDTextButton()
+    {
+        if(FindObjcet("IDInput").activeSelf==false)
+        {
+            FindObjcet("IDInput").SetActive(true);
+        }
+        else
+        {
+            FindObjcet("IDInput").SetActive(false);
+        }
     }
 }
