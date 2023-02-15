@@ -8,9 +8,11 @@ public class StromMoveScripts : MonoBehaviour
     [SerializeField] float m_speed=0.2f;
     [SerializeField] float m_plusSpeed = 10f;
     float horizon = 0f;
+    
     private void Start()
     {
     }
+
     private void Update()
     {
         if (GameManager.instance.gameMode == GameManager.GameMode.Playing)
@@ -20,6 +22,7 @@ public class StromMoveScripts : MonoBehaviour
             transform.RotateAround(Vector3.zero, transform.right, m_speed * Time.deltaTime);
         }
     }
+
     public void SpeedUp()
     {
         m_speed += m_plusSpeed;

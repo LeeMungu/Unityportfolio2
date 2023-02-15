@@ -10,11 +10,13 @@ public class TerchSreenMode : MonoBehaviour
         GetComponent<CustomButton>().EventButtonDown += ButtonDown;
         GetComponent<CustomButton>().EventButtonUp += ButtonUp;
     }
+
     void ButtonDown()
     {
         GetComponent<Image>().color = new Vector4(1f,1f,1f, 0.15f );
         
     }
+
     void ButtonUp()
     {
         GetComponent<Image>().color = new Vector4(1f, 1f, 1f, 0f);

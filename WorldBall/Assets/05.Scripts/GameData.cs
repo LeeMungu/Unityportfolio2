@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using BackEnd;
 using System.Text.RegularExpressions;
+
 public class GameData : MonoBehaviourSingleton<GameData>
 {
     [Header("Login&Register")]
@@ -14,7 +15,10 @@ public class GameData : MonoBehaviourSingleton<GameData>
     {
         return inputField != null && !string.IsNullOrEmpty(inputField.text);
     }
-    // 커스텀 가입
+
+    /// <summary>
+    /// 커스텀 가입
+    /// </summary>
     public void CustomSignUp()
     {
         Debug.Log("-------------CustomSignUp-------------");
@@ -28,12 +32,17 @@ public class GameData : MonoBehaviourSingleton<GameData>
         }
     }
 
-    //닉네임 체크
+    /// <summary>
+    /// 닉네임 체크
+    /// </summary>
     private bool CheckNickName()
     {
         return Regex.IsMatch(ID.text, "^[0-9a-zA-Z가-힣]*$");
     }
-    //닉네임 생성
+
+    /// <summary>
+    /// 닉네임 생성
+    /// </summary>
     public void OnClickCreatName()
     {
         if(CheckNickName()==false)
@@ -66,7 +75,10 @@ public class GameData : MonoBehaviourSingleton<GameData>
             }
         }
     }
-    //닉네임 변경
+
+    /// <summary>
+    /// 닉네임 변경
+    /// </summary>
     public void OnClickUpdateName()
     {
         if(CheckNickName()==false)
@@ -102,6 +114,7 @@ public class GameData : MonoBehaviourSingleton<GameData>
             }
         }
     }
+
     private void Awake()
     {
         BackendReturnObject bro = Backend.Initialize(true);
@@ -114,6 +127,7 @@ public class GameData : MonoBehaviourSingleton<GameData>
             Debug.LogError("Failed Backend.Initailize");
         }
     }
+
     public void InsertData()
     {
         Param param = new Param();

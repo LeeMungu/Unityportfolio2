@@ -10,12 +10,14 @@ public class JsonMgr : MonoBehaviour
 {
     public List<RankData> RankingList = new List<RankData>();
     String m_path = "/RankJson.json";//"/Resources/RankJson.json"
+    
     public void AddRank(string id, int score)
     {
         RankingList.Add(new RankData(id, score));
         //스코어 정렬
         RankingList.Sort((a,b)=>a.Score>b.Score? -1:1);
     }
+
     public void Save()
     {
         JsonData RankJson = JsonMapper.ToJson(RankingList);
@@ -23,6 +25,7 @@ public class JsonMgr : MonoBehaviour
         //파일에 쓰기
         File.WriteAllText(Application.persistentDataPath + m_path, RankJson.ToString());
     }
+
     public void Load()
     {
         if (!File.Exists(Application.persistentDataPath + m_path))

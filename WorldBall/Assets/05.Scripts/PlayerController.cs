@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 플레이어 컨트롤 클레스
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     readonly int m_animeHashKeyState = Animator.StringToHash("State");
@@ -10,12 +13,20 @@ public class PlayerController : MonoBehaviour
     readonly int m_animeHashKeyDie = Animator.StringToHash("Die");
 
     Animator m_animator;
+    
+    /// <summary>
+    /// 플레이어의 상태
+    /// </summary>
     enum State
     {
         Idle=0,
         Playing=1,
         Config=2
     }
+
+    /// <summary>
+    /// 터치 조작의 상태
+    /// </summary>
     enum TerchMode
     {
         Left,
@@ -37,6 +48,10 @@ public class PlayerController : MonoBehaviour
     State m_state = State.Idle;
     int m_randomIdle = 0;
     Coroutine m_randomIdleCoroutine = null;
+
+    /// <summary>
+    /// TODO : 특정 개체에서 사용 버튼 콜백 넣어주는건 확장하려면 구조상 문제가 있어서 개선할 필요가 있다.
+    /// </summary>
     private void Start()
     {
         m_animator = GetComponent<Animator>();
@@ -52,14 +67,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
         if (GameManager.instance.gameMode == GameManager.GameMode.Playing)
         {
             ChangeState(State.Playing);
             //float horizontal = Input.GetAxis("Horizontal");//좌우
             //float vertical = Input.GetAxis("Vertical");//앞뒤
 
-            //업됫을때만
+            //업되었을 때만
             if (m_terchMode == TerchMode.Noon)
             {
                 if (horizontal > 0)
@@ -96,6 +110,7 @@ public class PlayerController : MonoBehaviour
             ChangeState(State.Idle);
         }
     }
+
     void ChangeState(State state)
     {
         if (m_state == state)
@@ -120,7 +135,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     IEnumerator IrandomIdleEter()
     {
         while (true)
@@ -130,39 +144,46 @@ public class PlayerController : MonoBehaviour
             RandomIdleSet();
         }
     }
+
     void RandomIdleSet()
     {
         m_randomIdle = Random.Range(1, 4);
         m_animator.SetInteger(m_animeHashKeyRandomIdle, m_randomIdle);
         GetComponent<PlayerSoundSet>().IdleSoundPlay();
     }
+
     void HorizontalPlus()
     {
         if (horizontal < 1f)
             horizontal += m_radiuse;
     }
+
     void HorizontalMinus()
     {
         if (horizontal > -1f)
             horizontal -= m_radiuse;
     }
+
     void ButtonDownLeft()
     {
         if (m_terchMode == TerchMode.Right)
             horizontal = 0;
         m_terchMode = TerchMode.Left;
     }
+
     void ButtonDownRight()
     {
         if (m_terchMode == TerchMode.Left)
             horizontal = 0;
         m_terchMode = TerchMode.Right;
     }
+
     void ButtonUpLeft()
     {
         if (m_terchMode == TerchMode.Left)
             m_terchMode = TerchMode.Noon;
     }
+
     void ButtonUpRight()
     {
         if (m_terchMode == TerchMode.Right)
@@ -173,6 +194,7 @@ public class PlayerController : MonoBehaviour
     {
         m_animator.SetTrigger(m_animeHashKeyDie);
     }
+
     void OnRandomIdleAnimationEnd()
     {
         ChangeState(State.Idle);
@@ -180,7 +202,9 @@ public class PlayerController : MonoBehaviour
         m_animator.SetInteger(m_animeHashKeyRandomIdle,m_randomIdle);
     }
 
-    //시간에 따른 이속증가
+    /// <summary>
+    /// 시간에 따른 이속증가
+    /// </summary>
     public void PlusSpeed()
     {
         m_speed += m_plusSpeed;

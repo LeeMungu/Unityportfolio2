@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour
     public int scoreCount { get { return m_scoreCount; } }
     static UIManager s_instance = null;
     public static UIManager instance { get { return s_instance; } }
-    private Dictionary<string, GameObject> m_UIList = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> m_UIDic = new Dictionary<string, GameObject>();
+
     private void Awake()
     {
         s_instance = this;
@@ -37,11 +38,13 @@ public class UIManager : MonoBehaviour
         AddList("IDTextButton");
         AddList("IDInputField");
         AddList("IDInputButton");
+
         //사운드
         AddList("BGM");
         AddList("Vice");
         AddList("SE");
     }
+
     void Start()
     {
         //버튼에 값넣어주기
@@ -67,23 +70,25 @@ public class UIManager : MonoBehaviour
         FindObjcet("IDInput").SetActive(false);
     }
 
-
     private void AddList(string temp)
     {
-        m_UIList.Add(temp, GameObject.Find(temp));
+        m_UIDic.Add(temp, GameObject.Find(temp));
     }
+    
     public GameObject FindObjcet(string temp)
     {
-        if (m_UIList[temp] == null)
+        if (m_UIDic[temp] == null)
             return null;
 
-        return m_UIList[temp];
+        return m_UIDic[temp];
     }
+    
     public void ScorePlus (int addCount)
     {
         m_scoreCount+=addCount;
         FindObjcet("ScoreText").GetComponent<ScoreScript>().ScoreCount(m_scoreCount);
     }
+    
     public void TimeUpdate()
     {
         int m_time = (int)(GameManager.instance.time*60);
@@ -114,10 +119,12 @@ public class UIManager : MonoBehaviour
 
         FindObjcet("TimeText").GetComponent<Text>().text = timeText;
     }
+    
     public void IDText()
     {
         FindObjcet("IDText").GetComponent<Text>().text = "ID : " + GameManager.instance.playerID.ToString() ;
     }
+
     public void OnIDTextButton()
     {
         if(FindObjcet("IDInput").activeSelf==false)
