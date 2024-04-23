@@ -11,6 +11,7 @@ public class UISoundPlayer : MonoBehaviour
         m_audioSource = GetComponent<AudioSource>();
         GetComponent<CustomButton>().EventButtonDown += SoundPlay;
     }
+
     public void SoundPlay()
     {
         m_audioSource.Play();

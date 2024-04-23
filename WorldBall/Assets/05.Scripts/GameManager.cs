@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     static GameManager s_instance = null;
     public static GameManager instance { get { return s_instance; } }
+    
+    /// <summary>
+    /// 게임의 상태 나타내는 enum
+    /// </summary>
     public enum GameMode
     {
         Start,
@@ -13,13 +18,28 @@ public class GameManager : MonoBehaviour
         Config,
         GameOver
     }
+    
     GameMode m_gameMode = GameMode.Start;
+    
     public GameMode gameMode { get { return m_gameMode; } set { m_gameMode = value; } }
-    //일시정지용
+    
+    /// <summary>
+    /// 일시정지 구분 인자
+    /// </summary>
     bool m_isGamePlaying = false;
+    
     public bool isGamePlaying { get { return m_isGamePlaying; } set { m_isGamePlaying = value; } }
+    
     private Dictionary<string, GameObject> m_ObjectList = new Dictionary<string, GameObject>();
+    
+    /// <summary>
+    /// 몬스터 프리팹
+    /// </summary>
     [SerializeField] GameObject[] m_monsterPrepeb;
+
+    /// <summary>
+    /// 몬스터 갯수
+    /// </summary>
     [SerializeField] int m_monsterCount = 20;
     private List<GameObject> m_monsterList = new List<GameObject>();
 
@@ -28,6 +48,7 @@ public class GameManager : MonoBehaviour
     public float time { get { return m_time; } }
     string m_playerID = "testing";
     public string playerID { get { return m_playerID; } }
+
     private void Awake()
     {
         s_instance = this;
@@ -36,9 +57,12 @@ public class GameManager : MonoBehaviour
         AddList("Main Camera");
         AddList("Trap");
 
+        //GameData.instance.Guestlogin();
         if(SystemInfo.deviceUniqueIdentifier!=null)
-        m_playerID = SystemInfo.deviceUniqueIdentifier.Substring(0,5);
+            m_playerID = SystemInfo.deviceUniqueIdentifier.Substring(0,5);
+        UIManager.instance.IDText();
     }
+
     private void Start()
     {
         //프레임 제한
@@ -80,6 +104,7 @@ public class GameManager : MonoBehaviour
         }
         
         int countE = 0;
+
         for (int i = 0; i < m_monsterList.Count; ++i)
         {
             if (m_monsterList[i].activeSelf == true)
@@ -89,6 +114,7 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
+
         if (countE< m_monsterCount)
         {
             for(int i=0; i< m_monsterList.Count; ++i)
@@ -134,6 +160,7 @@ public class GameManager : MonoBehaviour
         m_isGamePlaying = false;
         FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.ChangeConfig);
     }
+
     public void ExitConfig()
     {
         m_gameMode = GameMode.Playing;
@@ -141,16 +168,21 @@ public class GameManager : MonoBehaviour
         UIManager.instance.FindObjcet("ConfigPanel").SetActive(false);
         FindObjcet("Main Camera").GetComponent<FallowCamera>().ChangeCameraMode(FallowCamera.CameraMode.Fallow);
     }
+
     public void OnRanking()
     {
         UIManager.instance.FindObjcet("RankingPanel").SetActive(true);
     }
+
     public void ExitRanking()
     {
         UIManager.instance.FindObjcet("RankingPanel").SetActive(false);
     }
 
-    public void OnRestart()//씬재시작
+    /// <summary>
+    /// 씬재시작
+    /// </summary>
+    public void OnRestart()
     {
         SceneManager.LoadScene(0);
     }
@@ -159,6 +191,7 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
     public void GameOver()
     {
         m_gameMode = GameMode.GameOver;
@@ -171,9 +204,21 @@ public class GameManager : MonoBehaviour
         UIManager.instance.FindObjcet("GameOverPanel").SetActive(true);
         GameData.instance.InsertData();
     }
-    //창나갔을때 정지
+
+    /// <summary>
+    /// 창나갔을때 정지
+    /// </summary>
     public void OnApplicationPause(bool pause)
     {
         m_isGamePlaying = pause;
+    }
+
+    /// <summary>
+    /// PlayerID셋팅
+    /// </summary>
+    public void ChangePlayerID(string text)
+    {
+        m_playerID = text;
+        UIManager.instance.IDText();
     }
 }

@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// 카메라 이동 컴포넌트
+/// </summary>
 public class FallowCamera : MonoBehaviour
 {
     public enum CameraMode
@@ -10,6 +14,7 @@ public class FallowCamera : MonoBehaviour
         ChangeConfig,
         Config
     }
+
     [SerializeField] GameObject m_target;
     [SerializeField] GameObject m_configTarget;
     [SerializeField] float m_upPosition;
@@ -17,6 +22,7 @@ public class FallowCamera : MonoBehaviour
     [SerializeField] float m_rotateSpeed = 0.3f;
     [SerializeField] float m_configLimitDistance = 3.5f;
     CameraMode m_cameraMode = CameraMode.Start;
+
     private void LateUpdate()
     {
         if (m_cameraMode == CameraMode.Fallow)
@@ -67,6 +73,7 @@ public class FallowCamera : MonoBehaviour
             transform.LookAt(m_target.transform.position + temp, m_target.transform.up);
         }
     }
+
     public void ChangeCameraMode(CameraMode cameraMode)
     {
         if (m_cameraMode == cameraMode)
@@ -88,7 +95,5 @@ public class FallowCamera : MonoBehaviour
             case CameraMode.Start:
                 break;
         }
-
-
     }
 }

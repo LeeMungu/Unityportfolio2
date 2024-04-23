@@ -24,11 +24,13 @@ public class SoundManager : MonoBehaviour
     {
         s_instance = this;
     }
+
     private void Start()
     {
         SoundSet();
         UIManager.instance.FindObjcet("ConfigPanel").SetActive(false);
     }
+
     private void Update()
     {
         if(UIManager.instance.FindObjcet("ConfigPanel").activeSelf==true)
@@ -36,6 +38,7 @@ public class SoundManager : MonoBehaviour
             SoundSet();
         }
     }
+
     private void SoundSet()
     {
         if (m_BgmVolum != m_BgmSlider.value)

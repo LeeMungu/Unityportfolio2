@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
     Text m_text;
+
     private void Start()
     {
         m_text = GetComponent<Text>();
     }
+
     private void Update()
     {
         

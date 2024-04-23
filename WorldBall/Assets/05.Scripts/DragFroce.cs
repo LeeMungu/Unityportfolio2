@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 이동 관련 컴포넌트
+/// </summary>
 public class DragFroce : MonoBehaviour
 {
-    
     [Header("Physics")]
     [SerializeField] float m_Speed = 10f;
     [SerializeField] float m_gravity = 9.8f;
@@ -35,8 +37,10 @@ public class DragFroce : MonoBehaviour
             transform.position -= transform.position.normalized * m_Speed;
             m_Speed += 0.01f;
         }
+
         //중력에 따른 회전
         RotateBody();
+        
         if (m_isGround)
         {
             //땅위에 있을때 고도 유지
@@ -47,6 +51,7 @@ public class DragFroce : MonoBehaviour
             transform.Rotate(new Vector3(0f, m_rotation, 0f), Space.Self);
         }
     }
+
     void RotateBody()
     {
         transform.up = (transform.position.normalized);
